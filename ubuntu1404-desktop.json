@@ -1,0 +1,14 @@
+{
+  "variables": {
+
+  },
+  "builder": [{
+
+  }],
+  "provisioners": [{
+
+  }],
+  "post-processors": [{
+
+  }]
+}

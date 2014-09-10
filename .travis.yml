@@ -1,0 +1,8 @@
+language: ruby
+rvm: 
+  - 1.9.3-p545
+install:
+  - bundle install
+  - curl -L -o packer.zip http://downloads.packer.io/v/0.7.0/linux/amd64 && unzip -d bin packer.zip
+script:
+  - PATH=$(pwd)/bin:$PATH bundle exec rake
