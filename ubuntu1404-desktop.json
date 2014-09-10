@@ -9,6 +9,6 @@
 
   }],
   "post-processors": [{
-
+    "type": "vagrant"
   }]
 }
