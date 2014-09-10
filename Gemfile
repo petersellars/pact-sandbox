@@ -6,4 +6,5 @@ end
 
 group :test do
   gem 'rainbow'
+  gem 'rake'
 end
