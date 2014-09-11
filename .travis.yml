@@ -4,5 +4,6 @@ rvm:
 install:
   - bundle install
   - curl -L -o packer.zip https://dl.bintray.com/mitchellh/packer/packer_0.7.0_linux_amd64.zip && unzip -d bin packer.zip
+  - cp resouces/packer-provisioner-host-command bin/.
 script:
   - PATH=$(pwd)/bin:$PATH bundle exec rake
