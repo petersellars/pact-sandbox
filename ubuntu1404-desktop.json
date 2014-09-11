@@ -1,22 +1,33 @@
 {
   "variables": {
+    "disk_size": 40000,
+    "headless": false,
     "iso_url": "http://releases.ubuntu.com/14.04/ubuntu-14.04.1-server-amd64.iso",
     "iso_checksum": "401c5f6666fe2879ac3a9a3247b487723410cf88"
   },
   "builders": [{
-    "vm_name": "ubuntu1404-desktop", 
+    "vm_name": "packer-ubuntu1404-desktop-amd64", 
     "type": "virtualbox-iso",
+    "guest_os_type": "Ubuntu_64",
     "iso_url": "{{ user `iso_url` }}",
     "iso_checksum": "{{ user `iso_checksum` }}",
     "iso_checksum_type": "sha1",
+    "output_directory": "output-packer-ubuntu1404-desktop-amd64",
+    "disk_size": "{{ user `disk_size` }}",
+    "headless": "{{ user `headless` }}",  
     "ssh_username": "vagrant",
-    "ssh_password": "vagrant"
+    "ssh_password": "vagrant",
+    "shutdown_command": "echo 'packer' | sudo -S shutdown -P now"
   }],
   "provisioners": [{
     "type": "shell",
     "scripts": [
       "script/update.sh"
     ]
+  },
+  {
+    "type": "host-command",
+    "command" : "ls -la" 
   }],
   "post-processors": [{
     "type": "vagrant"
