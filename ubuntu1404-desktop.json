@@ -1,9 +1,12 @@
 {
   "variables": {
+    "compression_level": 1, 
+    "cpus": "1",
     "disk_size": 40000,
     "headless": false,
     "iso_url": "http://releases.ubuntu.com/14.04/ubuntu-14.04.1-server-amd64.iso",
-    "iso_checksum": "401c5f6666fe2879ac3a9a3247b487723410cf88"
+    "iso_checksum": "401c5f6666fe2879ac3a9a3247b487723410cf88",
+    "memory": "512"
   },
   "builders": [{
     "vm_name": "packer-ubuntu1404-desktop-amd64", 
@@ -31,15 +34,21 @@
       "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
       "initrd=/install/initrd.gz -- ",
       "<enter>"
-    ], 
+    ],
+    "ssh_wait_timeout": "60m", 
     "ssh_username": "vagrant",
     "ssh_password": "vagrant",
-    "shutdown_command": "echo 'packer' | sudo -S shutdown -P now"
+    "shutdown_command": "echo 'packer' | sudo -S shutdown -P now",
+    "vboxmanage": [
+      ["modifyvm", "{{ .Name }}", "--memory", "{{ user `memory` }}"],
+      ["modifyvm", "{{ .Name }}", "--cpus", "{{ user `cpus` }}"]
+    ]
   }],
   "provisioners": [{
     "type": "shell",
+    "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
     "scripts": [
-      "script/update.sh"
+      "script/vagrant.sh"
     ]
   },
   {
@@ -47,6 +56,9 @@
     "command" : "ls -la" 
   }],
   "post-processors": [{
-    "type": "vagrant"
+    "type": "vagrant",
+    "keep_input_artifact": true,
+    "compression_level": "{{ user `compression_level` }}",
+    "output": "ubuntu-14.04-desktop-amd64.box"
   }]
 }
