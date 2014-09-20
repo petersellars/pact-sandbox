@@ -1,4 +1,5 @@
 *.box
+.idea/
 .bundle/
 .vagrant/
 packer_cache
