@@ -53,12 +53,7 @@
   },
   {
     "type": "host-command",
-    "command" : "ls -la" 
-  }],
-  "post-processors": [{
-    "type": "vagrant",
-    "keep_input_artifact": true,
-    "compression_level": "{{ user `compression_level` }}",
-    "output": "ubuntu-14.04-desktop-amd64.box"
+    "command" : "rake --trace packer:spec",
+    "environment_vars" : "SSH_PORT={{ .SSHPORT }}"
   }]
 }

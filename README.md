@@ -11,3 +11,11 @@ Uses the [packer-provisioner-host-command](https://github.com/shaunduncan/packer
 ### ISO Files
 
 For development purposes a local ISO file is used and placed in the ```iso``` directory. This has not been committed to source control. Refer to the ```development.json``` variable file for an example of how to use ISO files from this directory.
+
+```packer validate ubuntu1404-desktop.json```
+
+```packer validate --var-file=vars/development.json ubuntu1404-desktop.json```
+
+```rake``` - Clean and Validate Base Template
+
+```rake validate``` - Clean and Validate both the Base Template and Development Template
