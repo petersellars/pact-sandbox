@@ -53,7 +53,6 @@
   },
   {
     "type": "host-command",
-    "command" : "rake --trace packer:spec",
-    "environment_vars" : "SSH_PORT={{ .SSHPORT }}"
+    "command" : "rake --trace packer:spec"
   }]
 }
